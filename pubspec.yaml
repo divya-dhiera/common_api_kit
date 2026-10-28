@@ -1,7 +1,8 @@
 name: common_api_kit
 description: A reusable Flutter API package using Dio with support for HTTP requests, authentication tokens, connectivity checks, error handling, loading dialogs, multipart uploads, and GetX integration.
-version: 0.0.1
-homepage:
+version: 0.0.2
+homepage: https://github.com/divya-dhiera/common_api_kit.git
+repository: https://github.com/divya-dhiera/common_api_kit.git
 
 environment:
   sdk: ^3.12.1

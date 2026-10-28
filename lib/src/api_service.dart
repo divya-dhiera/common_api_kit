@@ -9,11 +9,25 @@ import 'package:get/get.dart' as get_x;
 
 import '../common_api_kit.dart';
 
+/// A comprehensive service class for handling HTTP network requests using [Dio],
+/// managing automatic progress loaders, checking internet connectivity, and handling
+/// authentication callbacks (such as unauthorized or session expired events).
+
 class ApiService {
+  /// Callback invoked when an unauthorized (401) response is received.
   static VoidCallback? onUnauthorized;
+
+  /// Callback invoked when a session expired (203) response is received.
   static VoidCallback? onSessionExpired;
+
+  /// Function that returns the current authorization token string.
   static String Function()? getAuthToken;
+
+  /// App name displayed in alert dialogs and error popups.
   static String appName = "App";
+
+  /// Performs an HTTP service call (GET, POST, PUT, DELETE) with optional progress dialog,
+  /// internet connectivity check, and automatic error handling.
 
   static Future<void> serviceCall({
     required Map<String, dynamic> params,
@@ -165,6 +179,7 @@ class ApiService {
     }
   }
 
+  /// Handles authentication responses (e.g. session expiration prompts).
   static void handleAuthentication({
     required BooleanResponseModel boolResponse,
     bool isFromLogOut = false,
@@ -207,7 +222,7 @@ class ApiService {
   static void showProgressDialog() {
     get_x.Get.dialog(
       Container(
-        color: Colors.black.withOpacity(0.1),
+        color: Colors.black.withValues(alpha: 0.1),
         child: const Center(
           child: SpinKitFadingCircle(color: Colors.orange, size: 50),
         ),
@@ -245,8 +260,8 @@ class ApiService {
       get_x.Get.back();
     }
     get_x.Get.dialog(
-      WillPopScope(
-        onWillPop: () async => isShowGoBack,
+      PopScope(
+        canPop: isShowGoBack,
         child: CupertinoAlertDialog(
           title: Text(appName),
           content: Column(

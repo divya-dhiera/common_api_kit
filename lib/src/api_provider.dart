@@ -1,8 +1,14 @@
 import 'package:dio/dio.dart' as dio_link;
 
+/// A utility class for initializing and providing a singleton [Dio] instance
+/// with custom base URLs, timeouts, and headers.
+
 class APIProvider {
   static dio_link.Dio? _dio;
   static dio_link.BaseOptions? _options;
+
+  /// Initializes the global [Dio] instance with the specified [baseUrl],
+  /// [timeoutMilliseconds], and [defaultHeaders].
 
   static void init({
     required String baseUrl,
@@ -21,6 +27,8 @@ class APIProvider {
         return false;
       },
     );
+
+    /// Returns the initialized [Dio] instance. Throws an exception if [init] was not called.
     _dio = dio_link.Dio(_options);
   }
 
